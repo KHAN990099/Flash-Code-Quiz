@@ -1,0 +1,206 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* CodeQuiz neumorphic design system — wine + red. Depth comes only from dual shadows. */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-wine: var(--wine);
+  --color-red: var(--red);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --radius: 1.25rem;
+  --bg: #2b0d16;
+  --surface-hex: #34121d;
+  --shadow-dark: #1a060c;
+  --shadow-light: #44192a;
+  --red-glow: rgba(229, 37, 75, 0.55);
+  --red-ring: rgba(229, 37, 75, 0.35);
+
+  --background: var(--bg);
+  --surface: var(--surface-hex);
+  --foreground: #f8e9ec;
+  --wine: #722f37;
+  --red: #e5254b;
+  --card: var(--bg);
+  --card-foreground: #f8e9ec;
+  --popover: var(--surface-hex);
+  --popover-foreground: #f8e9ec;
+  --primary: #e5254b;
+  --primary-foreground: #fff5f7;
+  --secondary: var(--surface-hex);
+  --secondary-foreground: #f8e9ec;
+  --muted: var(--surface-hex);
+  --muted-foreground: #c9a3ab;
+  --accent: #722f37;
+  --accent-foreground: #f8e9ec;
+  --destructive: #ff5c6c;
+  --destructive-foreground: #fff;
+  --border: rgba(248, 233, 236, 0.06);
+  --input: rgba(248, 233, 236, 0.08);
+  --ring: #e5254b;
+  --chart-1: #e5254b;
+  --chart-2: #722f37;
+  --chart-3: #c9a3ab;
+  --chart-4: #f8e9ec;
+  --chart-5: #a3283f;
+
+  --shadow-raised: 8px 8px 18px var(--shadow-dark), -8px -8px 18px var(--shadow-light);
+  --shadow-raised-sm: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  --shadow-inset: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+  --shadow-inset-sm: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  --glow: 0 0 24px var(--red-glow), 0 0 0 1px var(--red-ring);
+  --gradient-red: linear-gradient(90deg, #e5254b, #722f37);
+  --gradient-text: linear-gradient(120deg, #ff6b86, #e5254b 45%, #c9a3ab);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--wine);
+  }
+}
+
+@utility neu-raised {
+  background: var(--background);
+  box-shadow: var(--shadow-raised);
+}
+@utility neu-raised-sm {
+  background: var(--background);
+  box-shadow: var(--shadow-raised-sm);
+}
+@utility neu-inset {
+  background: var(--background);
+  box-shadow: var(--shadow-inset);
+}
+@utility neu-inset-sm {
+  background: var(--background);
+  box-shadow: var(--shadow-inset-sm);
+}
+/* Interactive: raised + red glow on hover, inset + glow when pressed/active */
+@utility neu-interactive {
+  background: var(--background);
+  box-shadow: var(--shadow-raised-sm);
+  transition:
+    box-shadow 250ms ease,
+    color 250ms ease,
+    transform 250ms ease;
+  &:hover {
+    box-shadow: var(--shadow-raised-sm), var(--glow);
+  }
+  &:active,
+  &[data-active="true"] {
+    box-shadow: var(--shadow-inset-sm), var(--glow);
+  }
+}
+@utility neu-glow-hover {
+  transition: box-shadow 250ms ease;
+  &:hover,
+  &:focus-within {
+    box-shadow: var(--shadow-raised), var(--glow);
+  }
+}
+@utility text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility bg-gradient-red {
+  background: var(--gradient-red);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes float-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1deg);
+  }
+}
+@utility animate-float {
+  animation: float-idle 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
